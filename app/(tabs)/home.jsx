@@ -5,6 +5,7 @@ import Slider from '../../components/Home/Slider'
 import Category from '../../components/Home/Category'
 import PetsList from '../../components/Home/PetsList'
 import AddNewPet from '../../components/Home/AddNewPet'
+import PetListByCategory from '../../components/Home/PetListByCategory'
 
 const Home = () => {
   return (
@@ -16,7 +17,7 @@ const Home = () => {
       <Slider />
 
       {/* Category */}
-      {/* <Category /> */}
+      <PetListByCategory />
 
       {/* list of pets */}
       {/* <PetsList />  */}
