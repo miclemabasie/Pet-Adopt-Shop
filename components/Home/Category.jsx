@@ -1,12 +1,15 @@
-import { View, Text, StyleSheet,FlatList, Image } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StyleSheet,FlatList, Image, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { db } from '../../config/FirebaseConfig'
 import { collection, getDocs } from 'firebase/firestore'
 import Colors from "../../constants/Colors"
 
 
-const Category = () => {
+const Category = ({setSelectedCategory, selectedCategory}) => {
   const [categories, setCategories ] = useState([])
+
+  
+
   const getCategories = async () => {
     setCategories([])
         try {
@@ -15,18 +18,18 @@ const Category = () => {
                 setCategories(categories => [...categories, doc.data()])
             })
         } catch (error) {
-            
+          console.log(error)
       }
-  };
-
-  
+  };  
 
   const renderItem = ({ item }) => (
-    <View style={{
+    <TouchableOpacity style={{
       flex: 1,
       borderRadius: 20,
-    }}>
-    <View style={styles.categoryBox}>
+    }}
+    onPress={() => setSelectedCategory(item.name)}
+    >
+    <View style={[styles.categoryBox, selectedCategory==item.name&&styles.selectedCategory]}>
       <Image source={{ uri: item.imageUrl }} style={styles.categoryImage} />
       
     </View>
@@ -35,16 +38,23 @@ const Category = () => {
         fontFamily: "outfit",
         fontSize: 18
       }}>{item.name}</Text>
-    </View>
+    </TouchableOpacity>
   );
+
+
   React.useEffect(() => {
     getCategories();
+
   }, []);
+
+
+
+
   return (
     <View style={styles.categoryContainer}>
       <Text style={styles.categorySectionTitle}>Categories</Text>
       
-      <View style={styles.categoryListBox}>
+      <View>
         <FlatList
           data={categories}
           renderItem={renderItem}
@@ -55,6 +65,8 @@ const Category = () => {
           
         />
         </View>
+
+        
     
     </View>
   )
@@ -92,7 +104,35 @@ const styles = StyleSheet.create({
     fontFamily: 'outfit-regular',
     fontSize: 16,
   },
-  // row: {
-  //   justifyContent: 'space-between',
-  // },
+
+  selectedCategory:  {
+    backgroundColor: "#3d83e4",
+    borderWidth: 2,
+    borderColor: "#06316d",
+  },
+  
+  petItemContainer: {
+    flex: 1,
+    margin: 10,
+    alignItems: 'center',
+    backgroundColor: Colors.SECONDARY,
+    padding: 10,
+    borderWidth: 2,
+    borderColor: "#7d5f05",
+    borderRadius: 10,
+  },
+  petImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  petName: {
+    marginTop: 10,
+    fontFamily: 'outfit-regular',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  row: {
+    justifyContent: 'space-between',
+  },
 })

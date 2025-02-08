@@ -6,7 +6,8 @@
 export default {
   PRIMARY: "#E8B20E",
   GRAY: "#8F8E8D",
-  WHITE: "#FFF"
+  WHITE: "#FFF",
+  SECONDARY: "#"
 }
 
 // const tintColorLight = '#0a7ea4';
