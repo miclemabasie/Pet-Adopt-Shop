@@ -1,14 +1,17 @@
-import { View, Text, FlatList, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Category from './Category';
 import Colors from '../../constants/Colors';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/FirebaseConfig';
+import { useRouter } from 'expo-router';
+
 
 const PetListByCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState("Cats");
   const [categoryPets, setCategoryPets] = useState([]);
   const [loading, setLoading] = useState(false); // New state for loading
+  const router = useRouter();
 
   const getPetsByCategory = async (category) => {
     setLoading(true); // Start loading
@@ -35,14 +38,19 @@ const PetListByCategory = () => {
 
   const renderPetItem = ({ item }) => {
     return (
-      <View style={styles.petItemContainer}>
+      <TouchableOpacity style={styles.petItemContainer}
+      onPress={() => router.push({
+        pathname: "/pet-details",
+        params: item
+      })}
+      >
         <Image source={{ uri: item.imageUrl }} style={styles.petImage} />
         <Text style={styles.petName}>{item.name}</Text>
         <View style={styles.petDetails}>
           <Text style={styles.petBreed}>{item.breed}</Text>
           <Text style={styles.petAge}>{item.age}Yrs</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -72,7 +80,6 @@ export default PetListByCategory;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 10,
   },
   flatListContent: {
@@ -114,8 +121,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   petAge: {
-    color: "#a3970e",
-    backgroundColor: "#f3e57c",
+    color: Colors.PRIMARY,
+    backgroundColor: Colors.SECONDARY,
     borderRadius: 5,
     paddingHorizontal: 5,
     fontSize: 14,
@@ -126,3 +133,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+

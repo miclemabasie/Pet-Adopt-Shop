@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     alignItems: 'center',
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.SECONDARY,
     padding: 5,
     borderWidth: 2,
-    borderColor: "#7d5f05",
+    borderColor: Colors.SECONDARY,
     borderRadius: 10,
   },
   categoryImage: {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   selectedCategory:  {
     backgroundColor: "#3d83e4",
     borderWidth: 2,
-    borderColor: "#06316d",
+    borderColor: "#3d83e4",
   },
   
   petItemContainer: {
@@ -131,8 +131,5 @@ const styles = StyleSheet.create({
     fontFamily: 'outfit-regular',
     fontSize: 16,
     textAlign: 'center',
-  },
-  row: {
-    justifyContent: 'space-between',
   },
 })

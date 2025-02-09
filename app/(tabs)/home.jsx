@@ -19,11 +19,8 @@ const Home = () => {
       {/* Category */}
       <PetListByCategory />
 
-      {/* list of pets */}
-      {/* <PetsList />  */}
-
       {/* Add a new pet */}
-      {/* <AddNewPet /> */}
+      <AddNewPet />
     </View>
   )
 }
