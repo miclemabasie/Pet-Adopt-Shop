@@ -8,7 +8,10 @@ import { router } from 'expo-router';
 const AddNewPet = () => {
   return (
     <TouchableOpacity
-      onPress={() => console.log('pressing')}
+      onPress={() => router.push({
+        pathname: "/add-pet",
+        params: {d:1}
+      })}
      style={styles.container}>
       <MaterialIcons name="pets" size={20} color={Colors.PRIMARY} />
       <Text style={styles.text}>Add New Pet</Text>
