@@ -1,21 +1,33 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
-import { Ionicons } from '@expo/vector-icons'; // For the favorite icon
-import Colors from '../../constants/Colors'; // Assuming you have a Colors file
+import { View, Text, StyleSheet } from 'react-native'
+import React from 'react'
+import Colors from '../../constants/Colors'
 
-const PetInfo = ({ pet }) => {
-  
+
+// {/* Four Boxes Section */}
+const PetDetailBoxes = ({ pet }) => {
   return (
-    <ScrollView>
-      {/* Image Section */}
-      <Image source={{ uri: pet.imageUrl }} style={styles.image} />
+    <View style={styles.boxesContainer}>
+    <View style={styles.box}>
+      <Text style={styles.boxLabel}>Age</Text>
+      <Text style={styles.boxValue}>{pet.age} Yrs</Text>
+    </View>
+    <View style={styles.box}>
+      <Text style={styles.boxLabel}>Breed</Text>
+      <Text style={styles.boxValue}>{pet.breed}</Text>
+    </View>
+    <View style={styles.box}>
+      <Text style={styles.boxLabel}>Sex</Text>
+      <Text style={styles.boxValue}>{pet.sex}</Text>
+    </View>
+    <View style={styles.box}>
+      <Text style={styles.boxLabel}>Weight</Text>
+      <Text style={styles.boxValue}>25 Kg</Text>
+    </View>
+  </View>
+  )
+}
 
-
-    </ScrollView>
-  );
-};
-
-export default PetInfo;
+export default PetDetailBoxes
 
 const styles = StyleSheet.create({
   container: {

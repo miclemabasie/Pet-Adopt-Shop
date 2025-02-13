@@ -37,11 +37,12 @@ const PetListByCategory = () => {
   }, [selectedCategory]);
 
   const renderPetItem = ({ item }) => {
+    console.log("this is the item", item)
     return (
       <TouchableOpacity style={styles.petItemContainer}
       onPress={() => router.push({
         pathname: "/pet-details",
-        params: item
+        params: { petItem: JSON.stringify(item) },
       })}
       >
         <Image source={{ uri: item.imageUrl }} style={styles.petImage} />

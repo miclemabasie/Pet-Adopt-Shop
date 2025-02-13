@@ -18,6 +18,7 @@ const petSchema = Yup.object().shape({
 const AddNewPet = ({ navigation }) => {
   const [imagePreview, setImagePreview] = useState(null);
 
+
   // Function to handle form submission
   const handleSubmit = async (values) => {
     try {

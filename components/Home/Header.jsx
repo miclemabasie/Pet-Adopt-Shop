@@ -4,7 +4,6 @@ import { useUser } from '@clerk/clerk-expo'
 
 const Header = () => {
     const {user} = useUser();
-    console.log(user.username)
   return (
     <View style={styles.headerContainer}>
         <View style={styles.headerInformation}>

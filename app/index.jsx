@@ -5,7 +5,7 @@ import { useUser } from '@clerk/clerk-expo'
 
 
 const Index = () => {
-  const user = useUser();
+  const {user} = useUser();
   
   return (
     <View style={{
