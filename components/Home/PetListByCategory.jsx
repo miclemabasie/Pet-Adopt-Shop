@@ -37,7 +37,6 @@ const PetListByCategory = () => {
   }, [selectedCategory]);
 
   const renderPetItem = ({ item }) => {
-    console.log("this is the item", item)
     return (
       <TouchableOpacity style={styles.petItemContainer}
       onPress={() => router.push({

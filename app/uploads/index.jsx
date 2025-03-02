@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Button, TextInput, Image, ScrollView, Alert } from "react-native";
+import { View, Button, TextInput, Image, ScrollView, Alert, TouchableOpacity, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 
@@ -12,13 +12,17 @@ const UploadCarScreen = () => {
   const pickImages = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsMultipleSelection: true, // Allow multiple selection
+      allowsMultipleSelection: true,
       quality: 1,
     });
 
     if (!result.canceled) {
-      setImages(result.assets); // Store selected images
+      setImages(result.assets);
     }
+  };
+
+  const removeImage = (index) => {
+    setImages(images.filter((_, i) => i !== index));
   };
 
   const uploadCar = async () => {
@@ -38,9 +42,9 @@ const UploadCarScreen = () => {
         type: "image/jpeg",
       });
     });
-
+    console.log("form data", formData)
     try {
-      const response = await axios.post("http://localhost/cars/create/", formData, {
+      const response = await axios.post("https://1f72-102-244-157-99.ngrok-free.app/api/cars/create/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -60,7 +64,15 @@ const UploadCarScreen = () => {
       <Button title="Pick Images" onPress={pickImages} />
       <ScrollView horizontal>
         {images.map((img, index) => (
-          <Image key={index} source={{ uri: img.uri }} style={{ width: 100, height: 100, margin: 5 }} />
+          <View key={index} style={{ position: "relative", margin: 5 }}>
+            <Image source={{ uri: img.uri }} style={{ width: 100, height: 100 }} />
+            <TouchableOpacity
+              style={{ position: "absolute", top: 5, right: 5, backgroundColor: "red", borderRadius: 10, paddingHorizontal: 5, paddingVertical: 2}}
+              onPress={() => removeImage(index)}
+            >
+              <Text style={{ color: "white", fontWeight: "bold" }}>X</Text>
+            </TouchableOpacity>
+          </View>
         ))}
       </ScrollView>
       <Button title="Upload Car" onPress={uploadCar} />

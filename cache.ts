@@ -20,6 +20,7 @@ const createTokenCache = (): TokenCache => {
       }
     },
     saveToken: (key: string, token: string) => {
+      console.log(key, token)
       return SecureStore.setItemAsync(key, token)
     },
   }

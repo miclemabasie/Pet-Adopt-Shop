@@ -13,7 +13,6 @@ const PetDetails = () => {
     const { petItem } = useLocalSearchParams();
     const pet = JSON.parse(petItem); // Convert string back to object
 
-    console.log("Parsed Pet:", pet);
   return (
     <>
     
